@@ -1,6 +1,6 @@
 #syntax=docker/dockerfile:1.4
 #checkov:skip=CKV_DOCKER_3: No need for a user
-FROM public.ecr.aws/docker/library/python:3.11.9-slim
+FROM public.ecr.aws/docker/library/python:3.13.0-slim
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y install procps
 
