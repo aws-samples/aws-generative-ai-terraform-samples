@@ -25,6 +25,10 @@ Each folder under the `samples` directory has a `README.md` with the specific in
     │       ├── main.tf                 # The main resources for the frontend (optional `app_name`)
     │       ├── outputs.tf              # The outputs needed for accessing the cloud deployment (and second `Dockerfile` edit)
     │       └── terraform.tfvars        # The variables from the backend to be entered
+    ├── bedrock-agent                   # Deploy an Amazon Bedrock Agen
+    │   ├── README.md                   # Instructions
+    │   ├── main.tf                     #
+    │   └── ...                         #
     └── ...
 ```
 
