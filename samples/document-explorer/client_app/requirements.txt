@@ -1,10 +1,10 @@
-boto3==1.35.61
+boto3==1.35.63
 cryptography==43.0.3
 pandas==2.2.3
-PyJWT==2.9.0
+PyJWT==2.10.0
 python-dotenv==1.0.1
-requests==2.32.0
-requests-aws4auth==1.2.3
+requests==2.32.3
+requests-aws4auth==1.3.1
 streamlit==1.40.1
 websocket-client==1.8.0
 st_pages==1.0.1
