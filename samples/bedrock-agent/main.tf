@@ -42,17 +42,21 @@ module "lambda" {
   # build_in_docker = true
   # docker_image = "build-python-poetry"
 
-
   source_path = [
     {
       path           = "${path.module}/lambda/action-group"
       poetry_install = true
-      # patterns = [
-      #   "!__pycache__/",
-      #   "!*.pyc",
-      #   "",
-      # ]
     }
   ]
+
+  architectures = [
+    "arm64",
+    # "x86_64",
+  ]
+  layers = [
+    "arn:aws:lambda:${var.region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-arm64:4",
+    # "arn:aws:lambda:${var.region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-x86_64:4",
+  ]
+
   hash_extra = "yo1"
 }
