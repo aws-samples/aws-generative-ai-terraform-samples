@@ -18,8 +18,10 @@ provider "opensearch" {
 }
 
 module "bedrock" {
-  source            = "aws-ia/bedrock/aws"
-  version           = "0.0.2"
+  #checkov:skip=CKV_TF_1:Terraform registry has no ability to use a commit hash
+  # source            = "aws-ia/bedrock/aws"
+  # version           = "0.0.3"
+  source             = "github.com/aws-ia/terraform-aws-bedrock//?ref=9c8177664a05a5596aaaa9cc0acaf75c16f4c407"
   create_kb         = true
   create_default_kb = true
   foundation_model  = "anthropic.claude-v2"
