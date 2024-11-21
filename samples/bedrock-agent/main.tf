@@ -38,6 +38,10 @@ module "lambda" {
   runtime = "python3.12"
   publish = true
 
+  # https://github.com/terraform-aws-modules/terraform-aws-lambda/blob/master/examples/fixtures/python-app-src-poetry/pyproject.toml
+  build_in_docker = true
+  docker_image = "build-python-poetry"
+
   source_path = "${path.module}/lambda"
   hash_extra = "yo1"
 }
