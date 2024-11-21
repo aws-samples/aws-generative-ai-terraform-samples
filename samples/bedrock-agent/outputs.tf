@@ -16,5 +16,5 @@ output "s3_uri" {
 
 output "bedrock_agent" {
   description = "valu"
-  value = length(module.bedrock.bedrock_agent) > 0 ? module.bedrock.bedrock_agent[0].agent_id : null #.agent_id
+  value       = length(module.bedrock.bedrock_agent) > 0 ? module.bedrock.bedrock_agent[0].agent_id : null
 }
