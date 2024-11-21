@@ -24,6 +24,20 @@ module "bedrock" {
   source             = "github.com/aws-ia/terraform-aws-bedrock//?ref=9c8177664a05a5596aaaa9cc0acaf75c16f4c407"
   create_kb         = true
   create_default_kb = true
+  create_agent      = true
   foundation_model  = "anthropic.claude-v2"
   instruction       = "You are an automotive assisant who can provide detailed information about cars to a customer."
+}
+
+module "lambda" {
+  source  = "terraform-aws-modules/lambda/aws"
+  version = "7.15.0"
+
+  function_name = "bedrock-agent-${lower(module.bedrock.bedrock_agent[0].agent_id)}-action" 
+  handler = "index.handler"
+  runtime = "python3.12"
+  publish = true
+
+  source_path = "${path.module}/lambda"
+  hash_extra = "yo1"
 }

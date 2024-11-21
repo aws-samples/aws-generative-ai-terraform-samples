@@ -13,3 +13,8 @@ output "s3_uri" {
   description = "The S3 Data source bucket name."
   value       = module.bedrock.s3_data_source_arn != null ? join("", concat(["s3://", split(":", module.bedrock.s3_data_source_arn)[length(split(":", module.bedrock.s3_data_source_arn)) - 1]])) : null
 }
+
+output "bedrock_agent" {
+  description = "valu"
+  value = length(module.bedrock.bedrock_agent) > 0 ? module.bedrock.bedrock_agent[0].agent_id : null #.agent_id
+}
