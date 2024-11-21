@@ -39,9 +39,20 @@ module "lambda" {
   publish = true
 
   # https://github.com/terraform-aws-modules/terraform-aws-lambda/blob/master/examples/fixtures/python-app-src-poetry/pyproject.toml
-  build_in_docker = true
-  docker_image = "build-python-poetry"
+  # build_in_docker = true
+  # docker_image = "build-python-poetry"
 
-  source_path = "${path.module}/lambda"
+
+  source_path = [
+    {
+      path = "${path.module}/lambda/action-group"
+      poetry_install = true
+      # patterns = [
+      #   "!__pycache__/",
+      #   "!*.pyc",
+      #   "",
+      # ]
+    }
+  ]
   hash_extra = "yo1"
 }
