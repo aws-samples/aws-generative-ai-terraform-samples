@@ -21,7 +21,7 @@ module "bedrock" {
   #checkov:skip=CKV_TF_1:Terraform registry has no ability to use a commit hash
   # source            = "aws-ia/bedrock/aws"
   # version           = "0.0.3"
-  source             = "github.com/aws-ia/terraform-aws-bedrock//?ref=9c8177664a05a5596aaaa9cc0acaf75c16f4c407"
+  source            = "github.com/aws-ia/terraform-aws-bedrock//?ref=9c8177664a05a5596aaaa9cc0acaf75c16f4c407"
   create_kb         = true
   create_default_kb = true
   create_agent      = true
@@ -33,10 +33,10 @@ module "lambda" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "7.15.0"
 
-  function_name = "bedrock-agent-${lower(module.bedrock.bedrock_agent[0].agent_id)}-action" 
-  handler = "index.handler"
-  runtime = "python3.12"
-  publish = true
+  function_name = "bedrock-agent-${lower(module.bedrock.bedrock_agent[0].agent_id)}-action"
+  handler       = "index.handler"
+  runtime       = "python3.12"
+  publish       = true
 
   # https://github.com/terraform-aws-modules/terraform-aws-lambda/blob/master/examples/fixtures/python-app-src-poetry/pyproject.toml
   # build_in_docker = true
@@ -45,7 +45,7 @@ module "lambda" {
 
   source_path = [
     {
-      path = "${path.module}/lambda/action-group"
+      path           = "${path.module}/lambda/action-group"
       poetry_install = true
       # patterns = [
       #   "!__pycache__/",
