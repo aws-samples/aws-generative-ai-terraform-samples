@@ -1,3 +1,5 @@
+.venv
+
 # Skip Visual Studio Code Workspace files
 *.code-workspace
 
