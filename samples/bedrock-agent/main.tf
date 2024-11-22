@@ -13,7 +13,6 @@ provider "opensearch" {
 
 module "bedrock" {
   #checkov:skip=CKV_TF_1:Terraform registry has no ability to use a commit hash
-  #source                       = "github.com/aws-ia/terraform-aws-bedrock//?ref=58798f1fcf95db48ce3f336c7e93d50c83e27ce8"
   source                       = "aws-ia/bedrock/aws"
   version                      = "0.0.3"
   create_kb                    = true
