@@ -159,9 +159,24 @@ Ask some questions. You may need to tell the agent what book you want to ask abo
 
 ## Clean up
 
-Do not forget to delete the stack to avoid unexpected charges.
+Do not forget to delete the resources to avoid unexpected charges.
 
-First make sure to remove all data from the Amazon Simple Storage Service (Amazon S3) Bucket.
+1. First make sure to remove all data from the Amazon Simple Storage Service (Amazon S3) Bucket.
+
+```shell
+aws s3 rb <DocBucket> --force
+```
+
+2. Next, set the data source to retain to allow Terraform to destroy all the resources.
+
+- open the console to the Bedrock Knowledge base
+- click the name of the knowledge base and verify the page shows the knowlege base id as output above <KBID>
+- click the data source and verify the data source id is the <DataSourceID> as above
+- click the edit button and expand "Advanced settings"
+- Change the data deletion policy from "Delete" to "Retain"
+- Click the submit button
+
+3. Last remove all the resources.
 
 ```shell
     $ terraform destroy
