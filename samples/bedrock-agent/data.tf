@@ -1,1 +1,1 @@
-# data "aws_bedrock_foundation_models" "test" {}
+data "aws_bedrock_foundation_models" "test" {}

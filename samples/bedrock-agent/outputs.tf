@@ -20,5 +20,5 @@ output "data_source_id" {
 
 # output "foundation_models" {
 #   description = "The Bedrock Agent's foundation models"
-#   value       = data.aws_bedrock_foundation_models.test
+#   value       = data.aws_bedrock_foundation_models.test.model_summaries[*].model_id
 # }

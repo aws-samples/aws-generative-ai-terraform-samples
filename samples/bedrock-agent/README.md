@@ -96,6 +96,8 @@ This project is built using [Terraform](https://www.terraform.io/). See [Getting
 5. Enable Access to Amazon Bedrock Models
 > You must explicitly enable access to models before they can be used with the Amazon Bedrock service. Please follow these steps in the [Amazon Bedrock User Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) to enable access to the models (```Anthropic::Claude```):.
 
+_NOTE: The default architecture is `x86_64`, feel free to add `-var="architecture=$(python -c "import platform;print('x86_64' if platform.machine().upper() in ['X86', 'AMD64'] else 'arm64')")"` to inspect and use your platform's architecture or set it directly with the `arm64.tfvars`_
+
 6. Check the plan.
 
     ```shell

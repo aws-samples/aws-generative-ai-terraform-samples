@@ -1,9 +1,3 @@
-variable "region" {
-  type        = string
-  description = "AWS region to deploy the resources"
-  default     = "us-east-1"
-}
-
 provider "aws" {
   region = var.region
 }
@@ -19,13 +13,13 @@ provider "opensearch" {
 
 module "bedrock" {
   #checkov:skip=CKV_TF_1:Terraform registry has no ability to use a commit hash
-  # source            = "aws-ia/bedrock/aws"
-  # version           = "0.0.3"
-  source                       = "github.com/aws-ia/terraform-aws-bedrock//?ref=58798f1fcf95db48ce3f336c7e93d50c83e27ce8"
+  #source                       = "github.com/aws-ia/terraform-aws-bedrock//?ref=58798f1fcf95db48ce3f336c7e93d50c83e27ce8"
+  source                       = "aws-ia/bedrock/aws"
+  version                      = "0.0.3"
   create_kb                    = true
   create_default_kb            = true
   create_agent                 = true
-  foundation_model             = "anthropic.claude-3-5-haiku-20241022-v1:0" # "anthropic.claude-v2"
+  foundation_model             = var.foundation_model
   instruction                  = "You are a helpful and friendly agent that answers questions about literature."
   create_ag                    = true
   action_group_name            = "bedrock-agent-action-group"
@@ -36,6 +30,7 @@ module "bedrock" {
 }
 
 module "lambda" {
+  #checkov:skip=CKV_TF_1:Terraform registry has no ability to use a commit hash
   source        = "terraform-aws-modules/lambda/aws"
   version       = "7.15.0"
   function_name = "bedrock-agent-action"
@@ -43,18 +38,12 @@ module "lambda" {
   runtime       = "python3.12"
   publish       = true
   timeout       = 15
+  architectures = ["${var.architecture}", ]
+  layers        = ["arn:aws:lambda:${var.region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-${var.architecture}:4", ]
   source_path = [
     {
       path           = "${path.module}/lambda/action-group"
       poetry_install = true
     }
-  ]
-  architectures = [
-    "arm64",
-    # "x86_64",
-  ]
-  layers = [
-    "arn:aws:lambda:${var.region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-arm64:4",
-    # "arn:aws:lambda:${var.region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-x86_64:4",
   ]
 }
