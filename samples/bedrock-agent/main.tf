@@ -25,7 +25,7 @@ module "bedrock" {
   create_kb                    = true
   create_default_kb            = true
   create_agent                 = true
-  foundation_model             = "anthropic.claude-v2"
+  foundation_model             = "anthropic.claude-3-5-haiku-20241022-v1:0" # "anthropic.claude-v2"
   instruction                  = "You are a helpful and friendly agent that answers questions about literature."
   create_ag                    = true
   action_group_name            = "bedrock-agent-action-group"

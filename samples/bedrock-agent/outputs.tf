@@ -1,6 +1,6 @@
 output "bedrock_agent_id" {
-  description = "valu"
-  value = length(module.bedrock.bedrock_agent) > 0 ? module.bedrock.bedrock_agent[0].agent_id : null
+  description = "The Amazon Bedrock Agent Id"
+  value       = length(module.bedrock.bedrock_agent) > 0 ? module.bedrock.bedrock_agent[0].agent_id : null
 }
 
 output "s3_uri" {
@@ -17,3 +17,8 @@ output "data_source_id" {
   description = "The Bedrock Agent's data source"
   value       = module.bedrock.datasource_identifier
 }
+
+# output "foundation_models" {
+#   description = "The Bedrock Agent's foundation models"
+#   value       = data.aws_bedrock_foundation_models.test
+# }
