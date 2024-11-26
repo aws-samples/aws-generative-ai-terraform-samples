@@ -6,7 +6,7 @@ This repository showcases Terraform examples to review and test AWS generative A
 
 ## Getting started
 
-Explore each self-contained example in the samples directory to get started! 
+Explore each self-contained example in the samples directory to get started!
 
 ## Structure
 

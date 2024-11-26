@@ -13,9 +13,9 @@ if [ $# -ne 3 ]; then
     exit 1
 fi
 
-S3_URI=$1
-KB_ID=$2
-DS_ID=$3
+S3_URI="$1"
+KB_ID="$2"
+DS_ID="$3"
 
 BOOKS_LIST=("https://www.gutenberg.org/ebooks/84.txt.utf-8"
   "https://www.gutenberg.org/ebooks/1342.txt.utf-8"
@@ -23,19 +23,19 @@ BOOKS_LIST=("https://www.gutenberg.org/ebooks/84.txt.utf-8"
   "https://www.gutenberg.org/ebooks/1513.txt.utf-8")
 
 # make a temporary directory to download the books
-BOOKS_DIR=`mktemp -d -t books.$$`
+BOOKS_DIR=$(mktemp -d -t "books.$$")
 
-pushd $BOOKS_DIR
+pushd "$BOOKS_DIR"
 
 # download the books
 for book in "${BOOKS_LIST[@]}"
 do
-  curl -L -o "$(basename $book).txt" $book
+  curl -L -o "$(basename $book).txt" "$book"
 done
 
-aws s3 sync . $S3_URI
+aws s3 sync . "$S3_URI"
 popd
-rm -rf $BOOKS_DIR
+rm -rf "$BOOKS_DIR"
 
 # sync kb
-aws bedrock-agent start-ingestion-job --knowledge-base-id $KB_ID --data-source-id $DS_ID
+aws bedrock-agent start-ingestion-job --knowledge-base-id "$KB_ID" --data-source-id "$DS_ID"

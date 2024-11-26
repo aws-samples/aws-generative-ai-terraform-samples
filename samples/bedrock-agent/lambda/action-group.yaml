@@ -3,12 +3,14 @@ info:
   title: Literary API
   description: Actions that Bedrock Agents can take to retrieve book details.
   version: 1.0.0
+security:  #checkov:skip=CKV_OPENAPI_4:Sample has no global security field rules
 paths:
   /top_books:
     get:
       summary: Get metadata about the most popular books
       description: Get metadata about the most popular books in the library.
       operationId: getTopBooks
+      security:  #checkov:skip=CKV_OPENAPI_5:Demonstration security operations empty
       responses:
         '200':
           description: Successful operation
@@ -22,6 +24,7 @@ paths:
                     description: The number of books in the library.
                   books:
                     type: array
+                    maxItems: 100
                     items:
                       $ref: '#/components/schemas/Book'
         '400':
@@ -53,26 +56,31 @@ components:
           description: The title of the book.
         subjects:
           type: array
+          maxItems: 1000
           description: The subjects of the book.
           items:
             type: string
         authors:
           type: array
+          maxItems: 100
           description: The author of the book.
           items:
             $ref: '#/components/schemas/Person'
         translators:
           type: array
+          maxItems: 100
           description: The translator of the book.
           items:
             $ref: '#/components/schemas/Person'
         bookshelves:
           type: array
+          maxItems: 1000
           description: The bookshelves the book is in.
           items:
             type: string
         languages:
           type: array
+          maxItems: 1000
           description: The languages the book is in.
           items:
             type: string
@@ -84,6 +92,7 @@ components:
           description: The media type of the book.
         formats:
           type: array
+          maxItems: 100
           description: The download formats of the book.
           items:
             $ref: '#/components/schemas/Format'

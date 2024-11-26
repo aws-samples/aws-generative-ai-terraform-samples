@@ -1,12 +1,11 @@
 #syntax=docker/dockerfile:1.4
-#checkov:skip=CKV_DOCKER_3: No need for a user
-FROM public.ecr.aws/docker/library/python:3.13.0-slim
+FROM public.ecr.aws/docker/library/python@sha256:bc78d3c007f86dbb87d711b8b082d9d564b8025487e780d24ccb8581d83ef8b0
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y install procps
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y install procps && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 COPY requirements.txt ./requirements.txt
-RUN pip3 install -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Set most of the environment variables from Terraform backend deployment outputs
 ENV COGNITO_DOMAIN='<COGNITO_DOMAIN>'
@@ -30,4 +29,5 @@ RUN chmod a+x /app/healthcheck.sh
 
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD [ "/app/healthcheck.sh" ]
 
+USER nobody
 ENTRYPOINT ["streamlit", "run", "Home.py", "--server.port=8501"]
