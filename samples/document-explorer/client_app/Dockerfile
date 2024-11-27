@@ -27,7 +27,6 @@ EXPOSE 8501
 COPY . .
 RUN chmod a+x /app/healthcheck.sh
 
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD [ "/app/healthcheck.sh" ]
-
 USER nobody
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD [ "/app/healthcheck.sh" ]
 ENTRYPOINT ["streamlit", "run", "Home.py", "--server.port=8501"]

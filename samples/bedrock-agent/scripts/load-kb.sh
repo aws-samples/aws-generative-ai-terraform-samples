@@ -30,7 +30,7 @@ pushd "$BOOKS_DIR"
 # download the books
 for book in "${BOOKS_LIST[@]}"
 do
-  curl -L -o "$(basename $book).txt" "$book"
+  curl -L -o "$(basename "$book").txt" "$book"
 done
 
 aws s3 sync . "$S3_URI"
