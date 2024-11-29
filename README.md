@@ -32,7 +32,7 @@ Each folder under the `samples` directory has a `README.md` with the specific in
     │   ├── scripts/load-kb.sh          # Script to load and synchronize the Bedrock knowledge base's data source
     │   ├── lambda/action-group/        # Code for the action group
     │   └── lambda/action-group.yaml    # The Open API specification for the action group
-    └── bedrock-guardrails
+    └── bedrock-guardrails              # An example usage for Bedrock guardrails
 ```
 
 ## Issues, Support, Security, and Contributing
