@@ -12,6 +12,7 @@ updates:
     directories:
       - "/samples/document-explorer/terraform-config-backend"
       - "/samples/document-explorer/terraform-config-frontend"
+      - "/samples/bedrock-agent"
     schedule:
       interval: "weekly"
     commit-message:
@@ -20,6 +21,7 @@ updates:
   - package-ecosystem: "pip"
     directories:
       - "/samples/document-explorer/client_app"
+      - "/samples/bedrock-agent/lambda/action-group"
     schedule:
       interval: "weekly"
     commit-message:
