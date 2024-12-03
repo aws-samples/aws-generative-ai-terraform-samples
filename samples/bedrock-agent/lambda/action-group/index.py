@@ -20,8 +20,7 @@ logger = Logger()
 
 app = BedrockAgentResolver()
 
-
-@app.get("/top_books")
+@app.get(rule="/top_books", description="Get top books from gutendex")
 def get_top_books():
     return get_books_from_gutendex(5)
 

@@ -110,14 +110,14 @@ _NOTE: The default architecture is `x86_64`, feel free to add `-var="architectur
     $ terraform apply
     ```
 
-The command above will deploy in your AWS account. With the default configuration of this sample, the observed deployment time was ~381 seconds (6.5 minutes).
+The command above will deploy in your AWS account. With the default configuration of this sample, the observed deployment time was ~451 seconds (7.5 minutes).
 
 To protect you against unintended changes that affect your security posture, the Terraform prompts you to approve before deploying them. You will need to answer "yes" to get the solution deployed.
 
 ```
 ...
 
-Apply complete! Resources: 27 added, 0 changed, 0 destroyed.
+Apply complete! Resources: 30 added, 0 changed, 0 destroyed.
 
 Outputs:
 

@@ -14,7 +14,7 @@ provider "opensearch" {
 module "bedrock" {
   #checkov:skip=CKV_TF_1:Terraform registry has no ability to use a commit hash
   source                       = "aws-ia/bedrock/aws"
-  version                      = "0.0.3"
+  version                      = "0.0.4"
   create_kb                    = true
   create_default_kb            = true
   create_agent                 = true
@@ -36,7 +36,7 @@ module "lambda" {
   handler       = "index.handler"
   runtime       = "python3.12"
   publish       = true
-  timeout       = 15
+  timeout       = 45
   architectures = ["${var.architecture}", ]
   layers        = ["arn:aws:lambda:${var.region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-${var.architecture}:4", ]
   source_path = [
@@ -45,4 +45,25 @@ module "lambda" {
       poetry_install = true
     }
   ]
+}
+
+resource "aws_lambda_permission" "allow_bedrock_agent" {
+  action        = "lambda:InvokeFunction"
+  function_name = module.lambda.lambda_function_arn
+  principal     = "bedrock.amazonaws.com"
+  source_arn    = module.bedrock.bedrock_agent[0].agent_arn
+}
+
+resource "aws_iam_role_policy" "agent_policy" {
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect   = "Allow"
+        Action   = "lambda:InvokeModel"
+        Resource = module.lambda.lambda_function_arn
+      }
+    ]
+  })
+  role = split("/", provider::aws::arn_parse(module.bedrock.bedrock_agent[0].agent_resource_role_arn).resource)[1]
 }
