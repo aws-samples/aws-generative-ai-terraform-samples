@@ -117,7 +117,7 @@ To protect you against unintended changes that affect your security posture, the
 ```
 ...
 
-Apply complete! Resources: 27 added, 0 changed, 0 destroyed.
+Apply complete! Resources: 28 added, 0 changed, 0 destroyed.
 
 Outputs:
 

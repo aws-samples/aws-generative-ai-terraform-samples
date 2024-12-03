@@ -46,3 +46,24 @@ module "lambda" {
     }
   ]
 }
+
+resource "aws_lambda_permission" "allow_bedrock_agent" {
+  action = "lambda:InvokeFunction"
+  function_name = module.lambda.lambda_function_arn
+  principal = "bedrock.amazonaws.com"
+  source_arn = module.bedrock.bedrock_agent[0].agent_arn
+}
+
+resource "aws_iam_role_policy" "agent_policy" {
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = "lambda:InvokeModel"
+        Resource = module.lambda.lambda_function_arn
+      }
+    ]
+  })
+  role   = split("/", provider::aws::arn_parse(module.bedrock.bedrock_agent[0].agent_resource_role_arn).resource)[1]
+}
