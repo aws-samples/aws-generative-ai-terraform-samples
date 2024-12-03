@@ -16,7 +16,7 @@ import requests
 def get_books_from_gutendex(n: int) -> dict:
     """Return the count and first n books from the /books API."""
     api_url = "https://gutendex.com"
-    response = requests.get(api_url + "/books", timeout=14) # keep a little less than the Lambda timeout
+    response = requests.get(api_url + "/books", timeout=44) # keep a little less than the Lambda timeout
     response.raise_for_status()
     books = response.json()
     return {"count": books["count"], "books": books["results"][:n]}

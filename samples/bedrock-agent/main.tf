@@ -36,7 +36,7 @@ module "lambda" {
   handler       = "index.handler"
   runtime       = "python3.12"
   publish       = true
-  timeout       = 15
+  timeout       = 45
   architectures = ["${var.architecture}", ]
   layers        = ["arn:aws:lambda:${var.region}:017000801446:layer:AWSLambdaPowertoolsPythonV3-python312-${var.architecture}:4", ]
   source_path = [
