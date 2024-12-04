@@ -19,6 +19,7 @@ The key files are annotated below:
 ├── outputs.tf                    # Outputs for the two bedrock agents
 ├── providers.tf
 ├── scripts
+│    ├── input.txt                # The inputs to test (one line at a time)
 │    ├── requirements.txt
 │    └── review.py                # Script to send input and review output
 └── variables.tf                  
