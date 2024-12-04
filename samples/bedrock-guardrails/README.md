@@ -9,20 +9,19 @@ abstracts the complexity of orchestrating AWS services like for Bedrock's guardr
 
 ## Folder Structure
 
-This sample application codebase is organized into folders : the backend code lives in
-The key folders are:
+The key files are annotated below:
 
 ```tree
 ├── README.md
-├── main.tf                      # Creation of the bedrock agent and lambda action group
-├── outputs.tf                   # Outputs to use in the initial loading script
+├── data.tf
+├── guardrails.auto.tfvars        # The configuration for the example guardrail
+├── main.tf
+├── outputs.tf                    # Outputs for the two bedrock agents
 ├── providers.tf
-├── variables.tf
-├── guardrails.auto.tfvars       # The configuration of the sample guardrails
-└── scripts
-    ├── 01_without_guardrails.py # Script to test without Bedrock Guardrails
-    ├── 02_with_guardrails.py    # Script to test with Bedrock Guardrails
-    └── requirements.txt         # Script to load and synchronize the Bedrock knowledge base's data source
+├── scripts
+│    ├── requirements.txt
+│    └── review.py                # Script to send input and review output
+└── variables.tf                  
 ```
 
 ## Getting started
@@ -77,16 +76,15 @@ This project is built using [Terraform](https://www.terraform.io/). See [Getting
 
     Outputs:
 
-    bedrock_agent_guardrail_identifier = "arn:aws:bedrock:aa-example-1:555555555555:guardrail/a1bcdefghijk"
-    bedrock_agent_with_guardrail_arn = "arn:aws:bedrock:aa-example-1:555555555555:agent/ZYXWVUTSR1"
-    bedrock_agent_without_guardrail_arn = "arn:aws:bedrock:aa-example-1:555555555555:agent/ABCDEFGHI9"
+    bedrock_agent_id_with_guardrail = "ZYXWVUTSR1"
+    bedrock_agent_id_without_guardrail = "ABCDEFGHI9"
     ```
 
-5. Record the two outputs for the Bedrock Agents for testing
+5. Note the two outputs for the Bedrock Agents for testing
 
 ## Test the agents
 
-We will use the `examples` in the `topics_config` variable listed within the `guardrails.auto.tfvars` file:
+We will use input similiar to the `examples` in the `topics_config` variable listed within the `guardrails.auto.tfvars` file:
 
 - `What stocks should I invest in for my retirement?`
 - `Is it a good idea to put my money in a mutual fund?`
@@ -107,19 +105,16 @@ We will use the `examples` in the `topics_config` variable listed within the `gu
     ```shell
     python -m venv .venv
     source .venv/bin/activate
+    pip install -r requirements.txt
     ```
 
-3. Run the script without guardrails.
+3. Run the script to see each agents responses.
 
     ```shell
-    python 01_without_guardrails.py
+    python review.py
     ```
 
-4. Run the script with guardrails.
-
-    ```shell
-    python 02_with_guardrails.py
-    ```
+4. (optional) Alter the `input.txt` and run the previous step again to see changes
 
 5. Deactivate and remove the virtual environment
 
@@ -128,9 +123,9 @@ We will use the `examples` in the `topics_config` variable listed within the `gu
     rm -r -f .venv
     ```
 
-### Use the console to test the agents
+### Use the console to test the agents with more examples
 
-Open the console test the agents.
+Alternatively, open the console test each agent (one with and one without guardrails) directly. _See [Test and troubleshoot agent behavior](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html)_.
 
 ## Cleanup
 
@@ -144,4 +139,7 @@ Open the console test the agents.
 
 ## References
 
-Here are some Bedrock Agents samples repositories and workshops for a deeper dive with guardrails!
+Here is a sample repositories and workshop to dive deeper with guardrails!
+
+- ["Responsible AI Samples" in Amazon Bedrock Service Sample Repository on Github](https://github.com/aws-samples/amazon-bedrock-samples/blob/main/responsible_ai)
+- ["Lab 8 - Creating Agent with Guardrails for Amazon Bedrock integration" in Amazon Bedrock Agents Workshop](https://catalog.workshops.aws/agents-for-amazon-bedrock/en-US/80-create-agent-with-guardrails)
