@@ -23,6 +23,7 @@ updates:
     directories:
       - "/samples/document-explorer/client_app"
       - "/samples/bedrock-agent/lambda/action-group"
+      - "/samples/bedrock-guardrails/scripts"
     schedule:
       interval: "weekly"
     commit-message:
