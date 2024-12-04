@@ -13,6 +13,7 @@ module "bedrock_withoutguardrail" {
   create_guardrail = false
   agent_name       = "WithoutGuardrail"
 }
+
 module "bedrock_withguardrail" {
   #checkov:skip=CKV_TF_1:Terraform registry has no ability to use a commit hash
   source                = "aws-ia/bedrock/aws"
