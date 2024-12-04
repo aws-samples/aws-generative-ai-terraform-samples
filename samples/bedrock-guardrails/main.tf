@@ -1,61 +1,118 @@
-#####################################################################################
-# Terraform module examples are meant to show an _example_ on how to use a module
-# per use-case. The code below should not be copied directly but referenced in order
-# to build your own root module that invokes this module
-#####################################################################################
-
-module "bedrock" {
+module "bedrock_withoutguardrail" {
   #checkov:skip=CKV_TF_1:Terraform registry has no ability to use a commit hash
   source                = "aws-ia/bedrock/aws"
-  version               = "0.0.3"
+  version               = "0.0.4"
   create_kb             = false
   create_default_kb     = false
   create_s3_data_source = false
-  create_guardrail      = true
-  filters_config = [
-    {
-      input_strength  = "MEDIUM"
-      output_strength = "MEDIUM"
-      type            = "HATE"
-    },
-    {
-      input_strength  = "HIGH"
-      output_strength = "HIGH"
-      type            = "VIOLENCE"
-    }
-  ]
-  pii_entities_config = [
-    {
-      action = "BLOCK"
-      type   = "NAME"
-    },
-    {
-      action = "BLOCK"
-      type   = "DRIVER_ID"
-    },
-    {
-      action = "ANONYMIZE"
-      type   = "USERNAME"
-    },
-  ]
-  regexes_config = [{
-    action      = "BLOCK"
-    description = "example regex"
-    name        = "regex_example"
-    pattern     = "^\\d{3}-\\d{2}-\\d{4}$"
-  }]
-  managed_word_lists_config = [{
-    type = "PROFANITY"
-  }]
-  words_config = [{
-    text = "HATE"
-  }]
-  topics_config = [{
-    name       = "investment_topic"
-    examples   = ["Where should I invest my money ?"]
-    type       = "DENY"
-    definition = "Investment advice refers to inquiries, guidance, or recommendations regarding the management or allocation of funds or assets with the goal of generating returns ."
-  }]
-  foundation_model = var.foundation_model
-  instruction      = "You are an automotive assisant who can provide detailed information about cars to a customer."
+  create_agent          = true
+  create_ag             = false
+  foundation_model      = var.foundation_model
+  instruction           = "You are a customer support agent for a financial institution that can answer general questions."
+
+  create_guardrail = false
+  agent_name       = "WithoutGuardrail"
+}
+module "bedrock_withguardrail" {
+  #checkov:skip=CKV_TF_1:Terraform registry has no ability to use a commit hash
+  source                = "aws-ia/bedrock/aws"
+  version               = "0.0.4"
+  create_kb             = false
+  create_default_kb     = false
+  create_s3_data_source = false
+  create_agent          = true
+  create_ag             = false
+  foundation_model      = var.foundation_model
+  instruction           = "You are a customer support agent for a financial institution that can answer general questions."
+  # above here is the same as above in the withoutguardrail module
+
+  create_guardrail          = true
+  agent_name                = "WithGuardrail"
+  pii_entities_config       = var.pii_entities_config
+  filters_config            = var.filters_config
+  regexes_config            = var.regexes_config
+  managed_word_lists_config = var.managed_word_lists_config
+  words_config              = var.words_config
+  topics_config             = var.topics_config
+  blocked_input_messaging   = var.blocked_input_messaging
+  blocked_outputs_messaging = var.blocked_outputs_messaging
+}
+
+resource "aws_iam_role_policy" "guardrail_policy" {
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = ["bedrock:GetAgentVersion",
+          "bedrock:ListDataSources",
+          "bedrock:ListModelInvocationJobs",
+          "bedrock:ListTagsForResource",
+          "bedrock:GetAgent",
+          "bedrock:GetDataSource",
+          "bedrock:DetectGeneratedContent",
+          "bedrock:ListAgents",
+          "bedrock:GetEvaluationJob",
+          "bedrock:GetModelEvaluationJob",
+          "bedrock:ListAgentVersions",
+          "bedrock:GetModelCopyJob",
+          "bedrock:ListCustomModels",
+          "bedrock:GetModelInvocationJob",
+          "bedrock:GetModelImportJob",
+          "bedrock:Retrieve",
+          "bedrock:InvokeInlineAgent",
+          "bedrock:InvokeModel",
+          "bedrock:GetAgentAlias",
+          "bedrock:GetAgentMemory",
+          "bedrock:ListFoundationModelAgreementOffers",
+          "bedrock:GetIngestionJob",
+          "bedrock:ListModelImportJobs",
+          "bedrock:GetFlowAlias",
+          "bedrock:ListFlows",
+          "bedrock:ListInferenceProfiles",
+          "bedrock:ApplyGuardrail",
+          "bedrock:GetFlowVersion",
+          "bedrock:ListAgentActionGroups",
+          "bedrock:ListProvisionedModelThroughputs",
+          "bedrock:ListAgentAliases",
+          "bedrock:GetFlow",
+          "bedrock:GetGuardrail",
+          "bedrock:GetFoundationModelAvailability",
+          "bedrock:GetKnowledgeBase",
+          "bedrock:InvokeFlow",
+          "bedrock:GetModelInvocationLoggingConfiguration",
+          "bedrock:GetInferenceProfile",
+          "bedrock:GetPrompt",
+          "bedrock:ListPrompts",
+          "bedrock:ListKnowledgeBases",
+          "bedrock:InvokeModelWithResponseStream",
+          "bedrock:ListFlowVersions",
+          "bedrock:ListFlowAliases",
+          "bedrock:ListModelCustomizationJobs",
+          "bedrock:ListModelCopyJobs",
+          "bedrock:ListGuardrails",
+          "bedrock:ListImportedModels",
+          "bedrock:ListAgentKnowledgeBases",
+          "bedrock:GetCustomModel",
+          "bedrock:ValidateFlowDefinition",
+          "bedrock:RenderPrompt",
+          "bedrock:GetResourcePolicy",
+          "bedrock:GetImportedModel",
+          "bedrock:GetUseCaseForModelAccess",
+          "bedrock:ListModelEvaluationJobs",
+          "bedrock:ListIngestionJobs",
+          "bedrock:ListEvaluationJobs",
+          "bedrock:GetAgentActionGroup",
+          "bedrock:GetModelCustomizationJob",
+          "bedrock:GetAgentKnowledgeBase",
+          "bedrock:InvokeAgent",
+          "bedrock:GetFoundationModel",
+          "bedrock:GetProvisionedModelThroughput",
+          "bedrock:ListFoundationModels",
+        ]
+        Resource = module.bedrock_withguardrail.bedrock_agent[0].guardrail_configuration.guardrail_identifier
+      }
+    ]
+  })
+  role = split("/", provider::aws::arn_parse(module.bedrock_withguardrail.bedrock_agent[0].agent_resource_role_arn).resource)[1]
 }

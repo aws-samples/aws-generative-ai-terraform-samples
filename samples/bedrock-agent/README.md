@@ -17,7 +17,7 @@ Gutenburg.
 By providing reusable modules following AWS best practices,
 this app helps you quickly build custom generative AI apps on AWS using Terraform.
 
-The AWS Terraform [bedrock](https://registry.terraform.io/modules/aws-ia/bedrock/aws/latest) module 
+The AWS Terraform [bedrock](https://registry.terraform.io/modules/aws-ia/bedrock/aws/latest) module
 abstracts the complexity of orchestrating AWS services like S3, OpenSearch, Bedrock, etc.
 
 Here is the architecture diagram of the sample application:
