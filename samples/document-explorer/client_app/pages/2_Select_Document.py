@@ -331,9 +331,9 @@ if auth.is_authenticated():
             update_mode=GridUpdateMode.SELECTION_CHANGED,
             fit_columns_on_grid_load=True
         )
-            
-        if selection["selected_rows"]:
-            selected_filename = selection["selected_rows"][0]["Transformed Filename"]
+
+        if selection.selected_rows is not None:
+            selected_filename = selection.selected_rows.iloc[0]["Transformed Filename"]
             st.session_state['selected_file'] = selected_filename
             print(st.session_state['selected_file'])
 
