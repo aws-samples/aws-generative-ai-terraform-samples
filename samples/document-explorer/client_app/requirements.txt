@@ -1,4 +1,4 @@
-boto3==1.35.72
+boto3==1.35.76
 cryptography==44.0.0
 pandas==2.2.3
 PyJWT==2.10.1
