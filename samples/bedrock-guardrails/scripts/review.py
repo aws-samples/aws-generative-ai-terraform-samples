@@ -30,7 +30,7 @@ for list_agents_response in list_agents_response_iterator:
                 items = 0
 
                 # read each line of a file "input.txt" into an array
-                with open('input.txt') as f:
+                with open('input.txt', encoding='utf8') as f:
                     input_lines = f.readlines()
                     input_text = [line.strip() for line in input_lines]
 
