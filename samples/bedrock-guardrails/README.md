@@ -5,7 +5,7 @@ This example shows how to deploy a basic Bedrock agent with guardrails, leaving 
 ## Overview
 
 The AWS Terraform [bedrock](https://registry.terraform.io/modules/aws-ia/bedrock/aws/latest) module
-abstracts the complexity of orchestrating AWS services like for Bedrock's guardrails. This 
+abstracts the complexity of orchestrating AWS services like for Bedrock's guardrails.
 
 ## Folder Structure
 

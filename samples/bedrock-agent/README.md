@@ -165,26 +165,26 @@ Do not forget to delete the resources to avoid unexpected charges.
 
 1. First make sure to remove all data from the Amazon Simple Storage Service (Amazon S3) Bucket.
 
-```shell
-aws s3 rb <DocBucket> --force
-```
+    ```shell
+    aws s3 rb <DocBucket> --force
+    ```
 
 2. Next, set the data source to retain to allow Terraform to destroy all the resources.
-
-- open the console to the Bedrock Knowledge base
-- click the name of the knowledge base and verify the page shows the knowlege base id as output above <KBID>
-- click the data source and verify the data source id is the <DataSourceID> as above
-- click the edit button and expand "Advanced settings"
-- Change the data deletion policy from "Delete" to "Retain"
-- Click the submit button
+    - open the console to the Bedrock Knowledge base
+    - click the name of the knowledge base and verify the page shows the knowlege base id as output above <KBID>
+    - click the data source and verify the data source id is the <DataSourceID> as above
+    - click the edit button and expand "Advanced settings"
+    - Change the data deletion policy from "Delete" to "Retain"
+    - Click the submit button
 
 3. Last remove all the resources.
 
-```shell
-    $ terraform destroy
-```
+    ```shell
+    terraform destroy
+    ```
 
 Delete all the associated logs created by the different services in Amazon CloudWatch logs
 
-# Content Security Legal Disclaimer
+## Content Security Legal Disclaimer
+
 The sample code; software libraries; command line tools; proofs of concept; templates; or other related technology (including any of the foregoing that are provided by our personnel) is provided to you as AWS Content under the AWS Customer Agreement, or the relevant written agreement between you and AWS (whichever applies). You should not use this AWS Content in your production accounts, or on production or other critical data. You are responsible for testing, securing, and optimizing the AWS Content, such as sample code, as appropriate for production grade use based on your specific quality control practices and standards. Deploying AWS Content may incur AWS charges for creating or using AWS chargeable resources, such as running Amazon EC2 instances or using Amazon S3 storage.
