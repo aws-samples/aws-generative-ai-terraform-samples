@@ -26,6 +26,7 @@ module "bedrock" {
   action_group_state           = "ENABLED"
   lambda_action_group_executor = module.lambda.lambda_function_arn
   api_schema_payload           = file("${path.module}/lambda/action-group.yaml")
+  kb_embedding_model_arn       = "arn:aws:bedrock:${var.region}::foundation-model/amazon.titan-embed-text-v1"
 }
 
 module "lambda" {

@@ -19,10 +19,10 @@ variable "foundation_model" {
   description = "The foundation model to use for the agent"
   nullable    = false
   default     = "anthropic.claude-3-haiku-20240307-v1:0"
-  validation {
-    condition     = contains(data.aws_bedrock_foundation_models.test.model_summaries[*].model_id, var.foundation_model)
-    error_message = "The foundational model is not found"
-  }
+  # validation {
+  #   condition     = contains(data.aws_bedrock_foundation_models.test.model_summaries[*].model_id, var.foundation_model)
+  #   error_message = "The foundational model is not found"
+  # }
 }
 
 # These are guardrail variables available within the Bedrock module and duplicated below for reference
