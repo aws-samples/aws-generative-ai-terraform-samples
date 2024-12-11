@@ -7,11 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+<!-- markdownlint-disable MD024 -->
+## [1.0.1]
+
 ### Added
 
 - Bedrock Guardrails sample
 
-<!-- markdownlint-disable MD024 -->
 ## [1.0.0]
 
 ### Added
