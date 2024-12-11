@@ -124,21 +124,27 @@ Default output format [None]: json
 
 2. Configure your environment variables in `client_app/Dockerfile`. Replace the property values with the values the were outputted from the backend Terraform deployment in your terminal. You will leave `APP_URI` as a placeholder for now because the URI will be the Cloudfront URL output from your Front End Terraform deployment.
 
+  > [!TIP]
+  > Use this command-line to get them from the Terraform outputs to copy and paste into the Dockerfile:
+  >
+  > ```shell
+  > terraform output | tr a-z A-Z | sed -e 's/ = /=/g' | sed -e 's/^/ENV /g' | sort -u
+  > ```
+
   ```Dockerfile
-  ENV COGNITO_DOMAIN = "<Output.CognitoDomain>"
-  ENV REGION = "<Output.Region>"
-  ENV USER_POOL_ID = "<Output.UserPoolId>"
-  ENV CLIENT_ID = "<Output.ClientId>"
-  ENV CLIENT_SECRET = "<COGNITO_CLIENT_SECRET>"
-  ENV IDENTITY_POOL_ID = "<Output.IdentityPoolId>"
-  ENV AUTHENTICATED_ROLE_ARN = "<Output.AuthenticatedRoleArn>"
-  ENV GRAPHQL_ENDPOINT = "<Output.GraphQLEndpoint>"
-  ENV S3_INPUT_BUCKET = "<Output.InputsAssetsBucket>"
-  ENV S3_PROCESSED_BUCKET = "<Output.ProcessedAssetsBucket>"
-  ENV CLIENT_NAME = "<Output.ClientName>"
+ENV AUTHENTICATED_ROLE_ARN='<AUTHENTICATED_ROLE_ARN>'
+ENV CLIENT_ID='<CLIENT_ID>'
+ENV CLIENT_NAME='<CLIENT_NAME>'
+ENV COGNITO_DOMAIN='<COGNITO_DOMAIN>'
+ENV GRAPHQL_ENDPOINT='<GRAPHQL_ENDPOINT>'
+ENV IDENTITY_POOL_ID='<IDENTITY_POOL_ID>'
+ENV REGION='<REGION>'
+ENV S3_INPUT_BUCKET='<S3_INPUT_BUCKET>'
+ENV S3_PROCESSED_BUCKET='<S3_PROCESSED_BUCKET>'
+ENV USER_POOL_ID='<USER_POOL_ID>'
   ```
 
-  Note: The ```COGNITO_CLIENT_SECRET``` is a secret value that can be retrieved from the AWS Console. Go to the [Amazon Cognito page](https://console.aws.amazon.com/cognito/home) in the AWS console, then select the created user pool. Under App integration, select App client settings. Then, select Show Details and copy the value of the App client secret.
+  Note: The ```location_of_cognito_user_client_secret``` is a location of the secret value that can be retrieved from the AWS Console. Go to the [Amazon Cognito page](https://console.aws.amazon.com/cognito/home) in the AWS console, then select the created user pool. Under App integration, select App client settings. Then, select Show Details and copy the value of the App client secret.
 
 <!-- markdownlint-disable MD029 -->
 3. Run `terraform init`
