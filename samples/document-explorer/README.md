@@ -124,12 +124,12 @@ Default output format [None]: json
 
 2. Configure your environment variables in `client_app/Dockerfile`. Replace the property values with the values the were outputted from the backend Terraform deployment in your terminal. You will leave `APP_URI` as a placeholder for now because the URI will be the Cloudfront URL output from your Front End Terraform deployment.
 
-  > [!TIP]
-  > Use this command-line to get them from the Terraform outputs to copy and paste into the Dockerfile:
-  >
-  > ```shell
-  > terraform output | tr a-z A-Z | sed -e 's/ = /=/g' | sed -e 's/^/ENV /g' | sort -u
-  > ```
+> [!TIP]
+> Use this command-line to get them from the Terraform outputs to copy and paste into the Dockerfile:
+>
+> ```shell
+> terraform output | tr a-z A-Z | sed -e 's/ = /=/g' | sed -e 's/^/ENV /g' | sort -u
+> ```
 
   ```Dockerfile
 ENV AUTHENTICATED_ROLE_ARN='<AUTHENTICATED_ROLE_ARN>'
