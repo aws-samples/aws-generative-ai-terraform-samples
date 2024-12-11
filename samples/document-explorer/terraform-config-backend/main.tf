@@ -5,6 +5,6 @@ module "genai_doc_ingestion" {
   source             = "github.com/aws-ia/terraform-aws-genai-document-ingestion-rag//?ref=4137b7ede3b80c11d28658877c97b3fef22cf31e"
 
   solution_prefix    = "doc-explorer"
-  container_platform = "linux/amd64"
+  container_platform = var.container_platform
   force_destroy      = true
 }
