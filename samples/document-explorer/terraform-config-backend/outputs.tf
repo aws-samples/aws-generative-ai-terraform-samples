@@ -1,4 +1,4 @@
-output "cognito_user_client_secret" {
+output "location_of_cognito_user_client_secret" {
   description = "ARN of the AWS Secrets Manager secret for Cognito client secret key"
   value       = module.genai_doc_ingestion.cognito_user_client_secret
 }
