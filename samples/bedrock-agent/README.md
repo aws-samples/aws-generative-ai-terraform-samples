@@ -135,7 +135,7 @@ s3_uri = <DocBucket>
 
 ### Test
 
-Navigate to the [Bedrock Agents console](https://us-east-1.console.aws.amazon.com/bedrock/home?region=us-east-1#/agents) in your region and find your new agent.
+Navigate to the [Bedrock Agents console](https://console.aws.amazon.com/bedrock/home#/agents) in your region and find your new agent.
 
 Ask some questions. You may need to tell the agent what book you want to ask about or refresh the session when asking about different books.
 

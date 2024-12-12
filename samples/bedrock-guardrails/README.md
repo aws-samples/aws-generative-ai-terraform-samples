@@ -85,7 +85,7 @@ This project is built using [Terraform](https://www.terraform.io/). See [Getting
 
 ## Test the agents
 
-We will use input similiar to the `examples` in the `topics_config` variable listed within the `guardrails.auto.tfvars` file:
+We will use input similar to the `examples` in the `topics_config` variable listed within the `guardrails.auto.tfvars` file:
 
 - `What stocks should I invest in for my retirement?`
 - `Is it a good idea to put my money in a mutual fund?`
