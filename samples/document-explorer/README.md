@@ -26,12 +26,12 @@ Here is the architecture diagram of the sample application:
 
 ## Folder Structure
 
-This Document Explorer codebase is organized into folders containing the ```frontend``` and ```backend``` infrastructure code. The frontend client app is built with [Streamlit](https://streamlit.io/) and is located in the ```client_app``` folder. The backend code lives in ```bin/document_explorer.ts``` and uses the AWS CDK resources defined in the ```lib``` folder.
+This Document Explorer codebase is organized into folders containing the ```frontend``` and ```backend``` infrastructure code. The frontend client app is built with [Streamlit](https://streamlit.io/) and is located in the ```client_app``` folder. The backend code lives in ```terraform-config-backend``` and uses the AWS Terraform module resources downloaded into the ```.terraform``` folder.
 
 The key folders are:
 
 ```tree
-samples/document_explorer
+samples/document-explorer
 ├── client_app                                   # Frontend using Python Streamlit
 │   │
 │   ├── Home.ts                                  # Sample app entry point
@@ -77,20 +77,14 @@ Default output format [None]: json
 - Clone this repository.
 
     ```shell
-    git clone <this>
+    git clone https://github.com/aws-samples/aws-generative-ai-terraform-samples.git
     ```
 
-- Enter the code sample backend directory.
+- Enter the code sample directory.
 
     ```shell
     cd samples/document-explorer
     ```
-
-- Install packages
-
-   ```shell
-   npm install
-   ```
 
 - Enable Access to Amazon Bedrock Models
 
