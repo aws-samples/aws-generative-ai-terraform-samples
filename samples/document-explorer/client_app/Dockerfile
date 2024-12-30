@@ -1,5 +1,5 @@
 #syntax=docker/dockerfile:1.4
-FROM public.ecr.aws/docker/library/python@sha256:9255d1993f6d28b8a1cd611b108adbdfa38cb7ccc46ddde8ea7d734b6c845e32
+FROM public.ecr.aws/docker/library/python@sha256:cea505b81701dd9e46b8dde96eaa8054c4bd2035dbb660edeb7af947ed38a0ad
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y install procps && apt-get clean && rm -rf /var/lib/apt/lists/*
 
