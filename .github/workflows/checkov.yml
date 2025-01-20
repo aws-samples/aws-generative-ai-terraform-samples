@@ -26,7 +26,7 @@ jobs:
       - name: Run Checkov
         run: pip install checkov && ( checkov --quiet --output cli --output json --output-file-path console,checkov.json --directory . || echo "checkov non-zero $?" )
       - name: Store Checkov as Artifact
-        uses: actions/upload-artifact@184d73b71b93c222403b2e7f1ffebe4508014249
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08
         with:
           name: checkov.json
           path: checkov.json
