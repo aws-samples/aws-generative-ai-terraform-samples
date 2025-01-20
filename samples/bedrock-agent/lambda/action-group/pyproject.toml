@@ -11,7 +11,7 @@ requests = "^2.32.0"
 
 
 [tool.poetry.group.dev.dependencies]
-aws-lambda-powertools = "^3.3.0"
+aws-lambda-powertools = "^3.4.1"
 
 [build-system]
 requires = ["poetry-core"]
