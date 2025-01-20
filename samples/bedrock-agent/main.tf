@@ -32,7 +32,7 @@ module "bedrock" {
 module "lambda" {
   #checkov:skip=CKV_TF_1:Terraform registry has no ability to use a commit hash
   source        = "terraform-aws-modules/lambda/aws"
-  version       = "7.17.0"
+  version       = "7.20.0"
   function_name = "bedrock-agent-action"
   handler       = "index.handler"
   runtime       = "python3.12"
