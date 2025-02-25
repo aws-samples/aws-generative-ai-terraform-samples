@@ -1,6 +1,6 @@
 # AWS Generative AI Terraform Samples
 
-This repository showcases Terraform examples to review and test AWS generative AI samples. The objective is to continue to add examples as new AWS Terraform modules are released. Once they are understood in depth, they can be used to extend on your own.
+This repository provides Terraform samples to demonstrate how to build your own Generative AI solutions using AWS Generative AI Terraform modules like the [Amazon Bedrock module](https://registry.terraform.io/modules/aws-ia/bedrock/aws/latest). The objective is to continue to add examples as new AWS Terraform modules are released. Once they are understood in depth, they can be used to extend on your own.
 
 <!-- Badges -->
 
