@@ -1,7 +1,7 @@
 module "bedrock_withoutguardrail" {
   #checkov:skip=CKV_TF_1:Terraform registry has no ability to use a commit hash
   source                = "aws-ia/bedrock/aws"
-  version               = "0.0.7"
+  version               = "0.0.17"
   create_kb             = false
   create_default_kb     = false
   create_s3_data_source = false
@@ -17,7 +17,7 @@ module "bedrock_withoutguardrail" {
 module "bedrock_withguardrail" {
   #checkov:skip=CKV_TF_1:Terraform registry has no ability to use a commit hash
   source                = "aws-ia/bedrock/aws"
-  version               = "0.0.7"
+  version               = "0.0.17"
   create_kb             = false
   create_default_kb     = false
   create_s3_data_source = false
