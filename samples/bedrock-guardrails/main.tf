@@ -1,28 +1,17 @@
 module "bedrock_withoutguardrail" {
   #checkov:skip=CKV_TF_1:Terraform registry has no ability to use a commit hash
   source                = "aws-ia/bedrock/aws"
-  version               = "0.0.7"
-  create_kb             = false
-  create_default_kb     = false
-  create_s3_data_source = false
-  create_agent          = true
-  create_ag             = false
+  version               = "0.0.19"
   foundation_model      = var.foundation_model
   instruction           = "You are a customer support agent for a financial institution that can answer general questions."
 
-  create_guardrail = false
   agent_name       = "WithoutGuardrail"
 }
 
 module "bedrock_withguardrail" {
   #checkov:skip=CKV_TF_1:Terraform registry has no ability to use a commit hash
   source                = "aws-ia/bedrock/aws"
-  version               = "0.0.7"
-  create_kb             = false
-  create_default_kb     = false
-  create_s3_data_source = false
-  create_agent          = true
-  create_ag             = false
+  version               = "0.0.19"
   foundation_model      = var.foundation_model
   instruction           = "You are a customer support agent for a financial institution that can answer general questions."
   # above here is the same as above in the withoutguardrail module
